@@ -13,7 +13,7 @@ bool dfs(int node,vector<vector<int>> &adj,vector<int> &visited,vector<int> &pat
             return true;
             }
         }
-        else if(!pathvisited[it]){
+        else if(pathvisited[it]){
             checkmark[node]=0;
             return true;
         }
@@ -29,8 +29,8 @@ vector<int> safeNodes(vector<vector<int>> &edges, int n, int e) {
     // Write your code here.
     vector<vector<int>> adj(n + 1);
     for (auto edge : edges) {
-      int u = edge.first;
-      int v = edge.second;
+      int u = edge[0];
+      int v = edge[1];
 
       adj[u].push_back(v);
   }
