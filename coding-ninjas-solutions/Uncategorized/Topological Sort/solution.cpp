@@ -3,7 +3,7 @@
 void dfs(int node,vector<int> &visited,stack<int> &st,vector<vector <int>> &adj){
     visited[node]=1;
     for(auto it:adj[node]){
-        if(!visited[node]) dfs(it,visited,st,adj);
+        if(!visited[it]) dfs(it,visited,st,adj);
     }
     st.push(node);
 }
