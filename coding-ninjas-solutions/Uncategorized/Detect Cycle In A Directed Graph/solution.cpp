@@ -1,4 +1,4 @@
-bool dfs(int node,vector<vector<int>> &adj,int visited[],int pathvisited[]){
+bool dfs(int node,vector<vector<int>> &adj,vector<int> &visited,vector<int> &pathvisited){
   visited[node]=1;
   pathvisited[node]=1;
   for(auto it:adj[node]){
@@ -16,7 +16,8 @@ bool dfs(int node,vector<vector<int>> &adj,int visited[],int pathvisited[]){
 
 int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
   // Write your code here.
-  vector<vector<int>> adj(n);
+  vector<vector<int>> adj(n + 1);
+
 
   for (auto edge : edges) {
       int u = edge.first;
@@ -24,9 +25,8 @@ int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
 
       adj[u].push_back(v);
   }
-  vector<int> visited(n, 0);
-  vector<int> visited(n, 0);
-  vector<int> pathvisited(n, 0);
+  vector<int> visited(n+1, 0);
+  vector<int> pathvisited(n+1, 0);
 
 
   for(int i=0;i<n;i++){
