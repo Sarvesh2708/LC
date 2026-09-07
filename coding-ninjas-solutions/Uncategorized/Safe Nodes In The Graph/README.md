@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Platform**: [Coding Ninjas / Code360](https://www.naukri.com/code360/problems/safe-nodes-in-the-graph_1376703)
-- **Difficulty**: Medium
+- **Difficulty**: Moderate
 - **Topics/Tags**: Uncategorized
 - **Language**: C++
 
