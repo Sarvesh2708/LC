@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Platform**: [Coding Ninjas / Code360](https://www.naukri.com/code360/problems/shortest-path-in-dag_8381897)
-- **Difficulty**: Medium
+- **Difficulty**: Moderate
 - **Topics/Tags**: Uncategorized
 - **Language**: C++
 
