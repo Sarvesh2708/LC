@@ -1,0 +1,31 @@
+#include <queue>
+#include <unordered_set>
+
+
+int wordLadder(string begin, string end, vector<string> &dict) 
+{
+	// Write your code here
+	queue<pair<string,int>>q;
+	q.push({begin,1});
+	//define an unordered set;
+	unordered_set<string> st(dict.begin(),dict.end());
+	st.erase(begin);
+	while(!q.empty()){
+		string word = q.front().first;
+		int step = q.front().second;
+		q.pop();
+		if(word==end) return step;
+		for(int i=0;i<word.size();i++){
+			char original = word[i];
+			for(char ch= 'a';ch<='z';ch++){
+				word[i] = ch;
+				if(st.find(word)!=st.end()){
+					st.erase(word);
+					q.push({word,step+1});
+				}
+			}
+			word[i] = original;
+		}
+	}
+	return -1;
+}
