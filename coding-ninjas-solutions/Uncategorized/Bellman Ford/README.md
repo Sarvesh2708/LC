@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Platform**: [Coding Ninjas / Code360](https://www.naukri.com/code360/problems/bellmon-ford_2041977)
-- **Difficulty**: Moderate
+- **Difficulty**: Medium
 - **Topics/Tags**: Uncategorized
 - **Language**: C++
 
