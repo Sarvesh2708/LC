@@ -1,50 +1,83 @@
-#include <queue>
-#include <vector>
-#include <functional>
+#include <bits/stdc++.h>
 using namespace std;
 
+class DisjointSet {
+    vector<int> rank, parent;
 
+public:
+    DisjointSet(int n) {
+        rank.resize(n, 0);
+        parent.resize(n);
+
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+        }
+    }
+
+    int findUparent(int node) {
+        if (node == parent[node])
+            return node;
+
+        return parent[node] = findUparent(parent[node]);
+    }
+
+    void unionByrank(int u, int v) {
+        int ulp_u = findUparent(u);
+        int ulp_v = findUparent(v);
+
+        if (ulp_u == ulp_v)
+            return;
+
+        if (rank[ulp_u] > rank[ulp_v]) {
+            parent[ulp_v] = ulp_u;
+        }
+        else if (rank[ulp_u] < rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        }
+        else {
+            parent[ulp_u] = ulp_v;
+            rank[ulp_v]++;
+        }
+    }
+};
 
 int minimumSpanningTree(vector<vector<int>>& edges, int n)
 {
-  /*
-    Don't write main().
-    Don't read input, it is passed as function argument.    
-    No need to print anything.
-    Taking input and printing output is handled automatically.
-  */
-  priority_queue<pair<int, int>,vector<pair<int, int>>,greater<pair<int, int>>> pq;
-  vector<vector<pair<int, int>>> adj(n);
+    // edges[i] = {u, v, weight}
+    // Convert to {weight, u, v} for easy sorting.
+    vector<tuple<int, int, int>> edgeList;
 
-  for (auto it : edges) {
-        int u = it[0];
-        int v = it[1];
-        int wt = it[2];
+    for (auto &edge : edges) {
+        int u = edge[0];
+        int v = edge[1];
+        int wt = edge[2];
 
-        adj[u].push_back({v, wt});
-        adj[v].push_back({u, wt});
+        edgeList.push_back({wt, u, v});
     }
-  
-  vector<int> visited(n,0);
-  pq.push({0,0});
-  int sum=0;
-  while(!pq.empty()){
-    auto it = pq.top();
-    pq.pop();
 
-    int wt = it.first;
-    int node = it.second;
+    // Sort edges according to weight
+    sort(edgeList.begin(), edgeList.end());
 
-    if(visited[node]==1) continue;
-    visited[node]=1;
-    sum += wt;
-    for(auto it : adj[node] ){
-      int adjNode = it.first;
-      int edw = it.second;
-      if(!visited[adjNode]){
-        pq.push({edw,adjNode});
-      }
+    DisjointSet ds(n);
+
+    int mstWeight = 0;
+    int edgesUsed = 0;
+
+    for (auto &[wt, u, v] : edgeList) {
+
+        // If u and v are in different components,
+        // adding this edge will not create a cycle.
+        if (ds.findUparent(u) != ds.findUparent(v)) {
+
+            mstWeight += wt;
+            ds.unionByrank(u, v);
+            edgesUsed++;
+
+            // MST of n vertices always has n-1 edges
+            if (edgesUsed == n - 1)
+                break;
+        }
     }
-  }
-  return sum;
+
+    return mstWeight;
 }
