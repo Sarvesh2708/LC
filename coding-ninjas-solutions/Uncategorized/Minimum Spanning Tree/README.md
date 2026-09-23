@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Platform**: [Coding Ninjas / Code360](https://www.naukri.com/code360/problems/minimum-spanning-tree_631769)
-- **Difficulty**: Moderate
+- **Difficulty**: Medium
 - **Topics/Tags**: Uncategorized
 - **Language**: C++
 
