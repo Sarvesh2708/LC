@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Platform**: [Coding Ninjas / Code360](https://www.naukri.com/code360/problems/accounts-merge_1089558)
-- **Difficulty**: Medium
+- **Difficulty**: Hard
 - **Topics/Tags**: Uncategorized
 - **Language**: C++
 
