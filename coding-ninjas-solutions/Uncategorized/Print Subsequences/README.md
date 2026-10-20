@@ -2,7 +2,7 @@
 
 ## Metadata
 - **Platform**: [Coding Ninjas / Code360](https://www.naukri.com/code360/problems/print-subsequences_624391)
-- **Difficulty**: Medium
+- **Difficulty**: Hard
 - **Topics/Tags**: Uncategorized
 - **Language**: C++
 
