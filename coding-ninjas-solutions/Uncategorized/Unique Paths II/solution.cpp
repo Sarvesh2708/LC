@@ -1,7 +1,7 @@
+int solve(int i, int j, vector<vector<int>>& mat,
+          vector<vector<int>>& dp) {
 
-int solve(int i,int j,vector<vector<int>>& mat,vector<vector<int>>& dp){
-        
-        int MOD = 1e9 + 7;
+    int MOD = 1e9 + 7;
 
     // Out of bounds
     if(i < 0 || j < 0) return 0;
@@ -15,18 +15,15 @@ int solve(int i,int j,vector<vector<int>>& mat,vector<vector<int>>& dp){
     // Already calculated
     if(dp[i][j] != -1) return dp[i][j];
 
-        int up = solve(i-1,j,mat,dp);
-        int left = solve(i,j-1,mat,dp);
+    int up = solve(i-1, j, mat, dp);
+    int left = solve(i, j-1, mat, dp);
 
-        return dp[i][j]= (up+left);
-        
+    return dp[i][j] = ((long long)up + left) % MOD;
 }
 
+int mazeObstacles(int n, int m, vector<vector<int>>& mat) {
 
-
-int mazeObstacles(int n, int m, vector< vector< int> > &mat) {
     vector<vector<int>> dp(n, vector<int>(m, -1));
 
-
-    return solve(n-1, m-1, mat,dp);
+    return solve(n-1, m-1, mat, dp);
 }
