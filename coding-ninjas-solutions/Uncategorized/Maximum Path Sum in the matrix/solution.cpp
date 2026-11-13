@@ -1,35 +1,32 @@
 #include <bits/stdc++.h> 
 
-
-int f(int i,int j,vector<vector<int>> &matrix){
-    int n = matrix.size();
-    int m = matrix[0].size();
-
-    if(j<0 || j>=m) return INT_MIN;
-    if(i==0) return matrix[0][j];
-    // int up = matrix[i][j] + f(i-1,j,matrix);
-    // int digleft = matrix[i][j] + f(i-1,j-1,matrix);
-    // int digright = matrix[i][j] + f(i-1,j+1,matrix);
-    // return max(up,max(digleft,digright));
-    int up = matrix[i][j] + f(i-1,j,matrix);
-
-    int left = matrix[i][j] + f(i-1,j-1,matrix);
-
-    int right = matrix[i][j] + f(i-1,j+1,matrix);
-
-    return max(up, max(left, right));
-
-}
-
 int getMaxPathSum(vector<vector<int>> &matrix)
 {
     //  Write your code here.
-    int n = matrix.size();
-    int m = matrix[n].size();
-    int maxi = -1e8;
+    int m= matrix.size();
+    int n= matrix[0].size();
+    vector<vector<int>>dp(m,vector<int>(n,-1));
+    
+    for(int j=0;j<n;j++) dp[0][j] = matrix[0][j];
 
-    for(int j=0;j<m;j++){
-      maxi = max(maxi,f(n-1,j,matrix));
+
+    for(int i=1;i<m;i++){
+        for(int j=0;j<n;j++){
+            int up= matrix[i][j]+dp[i-1][j];
+            int downleft= matrix[i][j];
+            if(j-1>=0) downleft+=dp[i-1][j-1];
+            else downleft+=-1e8;
+            int downright= matrix[i][j];
+            if(j+1<n) downright+=dp[i-1][j+1];
+            else downright+=-1e8;
+            dp[i][j] = max(up,max(downleft,downright));
+        }
+    }
+    int maxi = -1e8;
+    for(int j=0;j<n;j++){
+        maxi = max(maxi,dp[m-1][j]);
     }
     return maxi;
+
+
 }
